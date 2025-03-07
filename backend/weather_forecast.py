@@ -68,7 +68,7 @@ def main():
      "hour" : forecastArray
   }
 
-  doc_ref = db.collection("primary").document("wind_forecast_latest")
+  doc_ref = db.collection("primary").document("weather_forecast_latest")
   doc_ref.set(firestore_object)
 
 
