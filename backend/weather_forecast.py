@@ -39,17 +39,10 @@ def main():
 
   forecastArray = []
 
-  et_tz = pytz.timezone('US/Eastern')
-  utc_tz = pytz.timezone('UTC')
-
   for i in data["forecast"]["forecastday"]:
      for j in i["hour"]:
-        datetime_obj = datetime.datetime.fromtimestamp(j["time_epoch"])
-        datetime_et = et_tz.localize(datetime_obj)
-        datetime_utc = datetime_et.astimezone(utc_tz)
-
         hour_object = {
-          "time" : datetime_utc,
+          "time" : datetime.datetime.fromtimestamp(j["time_epoch"]),
           "condition_text" : j["condition"]["text"],
           "condition_icon" : j["condition"]["icon"],
           "temp_f" : j["temp_f"],
