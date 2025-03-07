@@ -1,0 +1,32 @@
+name: run wind_forecast.py
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "10 05 * * *" # run at 12:10 AM ET every day
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v2 # checkout the repository content to github runner
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12" # install the python version needed
+
+      - name: install python packages
+        working-directory: ./backend
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: execute py script
+        working-directory: ./backend
+        env:
+          FIRESTOREKEY: ${{ secrets.FIRESTOREKEY }}
+          WEATHERAPIKEY: ${{ secrets.WEATHERAPIKEY }}
+        run: python wind_forecast.py

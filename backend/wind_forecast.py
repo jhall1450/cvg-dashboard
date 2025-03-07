@@ -28,10 +28,6 @@ def main():
   firebase_admin.initialize_app(cred)
   db = firestore.client()
 
-  # windDegreeMax = 315
-  # windDegreeMin = 225
-  # windSpeedMin = 5
-
   location = "39.04456,-84.67229"
   forecastDays = 1
   airQualityInfo = "no"
@@ -72,7 +68,7 @@ def main():
      "hour" : forecastArray
   }
 
-  doc_ref = db.collection("primary").document("weather_forecast_latest")
+  doc_ref = db.collection("primary").document("wind_forecast_latest")
   doc_ref.set(firestore_object)
 
 
